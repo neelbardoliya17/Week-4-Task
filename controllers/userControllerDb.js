@@ -10,11 +10,11 @@ const getAllUsers = (req, res) => {
       if (users.length === 0) {
         return res.status(404).json({ message: "No users found" });
       }
-      res.json(users);
+      return res.json(users);
     });
   } catch (error) {
     console.error("error occurs:", error.message);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -29,11 +29,11 @@ const getUserById = (req, res) => {
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      res.json(user);
+      return res.json(user);
     });
   } catch (error) {
     console.error("error occurs:", error.message);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -58,12 +58,12 @@ const createUser = (req, res) => {
           console.error("Error adding user:", err);
           return res.status(500).json({ message: "Internal server error" });
         }
-        res.status(201).json({ id: this.lastID, name, email, age });
+       return  res.status(201).json({ id: this.lastID, name, email, age });
       }
     );
   } catch (error) {
     console.error("error occurs:", error.message);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -98,7 +98,7 @@ const updateUser = (req, res) => {
     });
   } catch (error) {
     console.log("error occurs:", error.message);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -116,7 +116,7 @@ const deleteUser = (req, res) => {
       }
 
       console.log(this.changes);
-      
+
       res.json({
         message: "User deleted successfully",
         updateData: this.changes,
@@ -124,7 +124,7 @@ const deleteUser = (req, res) => {
     });
   } catch (error) {
     console.log("error occurs:", error.message);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 

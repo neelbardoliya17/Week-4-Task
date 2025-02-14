@@ -6,10 +6,10 @@ const getAllUsers = (req, res) => {
     if (users.length===0) {
       throw new Error("No user found");
     }
-    res.json(users);
+    return res.json(users);
   } catch (error) {
     console.log(`Error in getAllUsers:`, error);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Internal server error",
     });
   }
@@ -30,10 +30,10 @@ const getUserById = (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.json(user);
+    return res.json(user);
   } catch (error) {
     console.log(`Error in getUserById`, error);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Internal server error",
     });
   }
@@ -70,10 +70,10 @@ const createUser = (req, res) => {
   
    const result= addUser(newUser);
     
-    res.status(201).json(newUser);
+    return res.status(201).json(newUser);
   } catch (error) {
     console.log(`Error in createUser`, error);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Internal server error",
     });
   }
@@ -114,10 +114,10 @@ const updateUser = (req, res) => {
       ...userData,
     };
 
-    res.json(users[index]);
+    return res.json(users[index]);
   } catch (error) {
     console.log("Error in updateUser:", error);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Internal server error",
     });
   }
@@ -142,13 +142,13 @@ const deleteUser = (req, res) => {
 
     const deletedUser = users.splice(index, 1)[0];
 
-    res.json({
+    return res.json({
       message: "User deleted successfully",
       user: deletedUser,
     });
   } catch (error) {
     console.error("Error in deleteUser:", error);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Internal server error",
     });
   }
